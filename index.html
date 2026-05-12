@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Shashank Makwana | Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--navy:#0a1628;--teal:#00b4a6;--teal2:#00d4c4;--teal-light:#e0faf8;--teal-mid:#b2f0eb;--white:#fff;--gray:#f4f7fa;--gray2:#e8edf3;--text:#1a2340;--text2:#4a5568;--text3:#718096;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray2);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px;}
+.logo{font-size:20px;font-weight:700;color:var(--navy);flex-shrink:0;}.logo span{color:var(--teal);}
+.nav-links{display:flex;gap:20px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:13px;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--teal);}
+.nav-cta{background:var(--teal);color:white;padding:8px 16px;border-radius:25px;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;transition:all .2s;}
+.nav-cta:hover{background:var(--teal2);}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{width:22px;height:2px;background:var(--navy);border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:white;border-bottom:1px solid var(--gray2);z-index:199;flex-direction:column;padding:12px 0;box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{padding:13px 20px;color:var(--text2);text-decoration:none;font-size:15px;font-weight:500;border-bottom:1px solid var(--gray2);}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a:hover{color:var(--teal);background:var(--teal-light);}
+
+/* HERO */
+.hero{min-height:100svh;background:linear-gradient(135deg,#0a1628 0%,#0d2040 55%,#0a2d3a 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 16px 60px;}
+#heroCanvas{position:absolute;inset:0;z-index:0;}
+.hero-grid-bg{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(0,180,166,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,166,0.04) 1px,transparent 1px);background-size:40px 40px;}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;z-index:3;width:100%;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,180,166,0.15);border:1px solid rgba(0,180,166,0.3);color:var(--teal2);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;margin-bottom:20px;}
+.dot{width:7px;height:7px;background:var(--teal2);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+.hero h1{font-size:44px;font-weight:800;color:white;line-height:1.1;letter-spacing:-1px;margin-bottom:12px;}
+.hero h1 span{color:var(--teal2);}
+.hero-tagline{font-size:16px;color:rgba(255,255,255,.7);margin-bottom:28px;line-height:1.6;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{background:var(--teal);color:white;padding:13px 24px;border-radius:30px;font-size:14px;font-weight:600;text-decoration:none;transition:all .25s;box-shadow:0 8px 25px rgba(0,180,166,.35);display:inline-block;}
+.btn-primary:hover{background:var(--teal2);}
+.btn-outline{background:transparent;color:white;padding:13px 24px;border-radius:30px;font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,.3);transition:all .25s;display:inline-block;}
+.btn-outline:hover{border-color:var(--teal2);color:var(--teal2);}
+.hero-visual{display:flex;justify-content:center;}
+.dashboard-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px;width:100%;max-width:320px;backdrop-filter:blur(10px);animation:floatY 5s ease-in-out infinite;}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.dash-title{color:white;font-size:12px;font-weight:600;}
+.dash-badge{background:rgba(0,212,196,.2);color:var(--teal2);font-size:10px;padding:3px 8px;border-radius:10px;}
+.dash-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.stat-box{background:rgba(255,255,255,.07);border-radius:8px;padding:10px;}
+.stat-num{color:var(--teal2);font-size:18px;font-weight:700;}
+.stat-lbl{color:rgba(255,255,255,.45);font-size:9px;margin-top:2px;}
+.chart-bars{display:flex;align-items:flex-end;gap:4px;height:55px;margin-bottom:8px;}
+.bar{background:rgba(0,180,166,.2);border-radius:3px 3px 0 0;flex:1;position:relative;overflow:hidden;}
+.bar-fill{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,var(--teal),var(--teal2));border-radius:3px 3px 0 0;animation:grow 1.5s ease forwards;}
+@keyframes grow{from{height:0;}to{height:var(--h);}}
+.dash-footer{color:rgba(255,255,255,.4);font-size:10px;}.trend{color:#00e676;font-weight:600;}
+
+/* SECTIONS */
+section{padding:70px 16px;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-tag{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.5px;margin-bottom:10px;}
+.section-title{font-size:32px;font-weight:800;color:var(--navy);letter-spacing:-.5px;margin-bottom:10px;}
+.section-sub{color:var(--text2);font-size:15px;line-height:1.6;max-width:600px;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.about-card{background:var(--navy);border-radius:20px;padding:32px;color:white;position:relative;overflow:hidden;animation:floatY 6s ease-in-out infinite;}
+.about-card-glow{position:absolute;top:-60px;right:-60px;width:180px;height:180px;background:var(--teal);border-radius:50%;opacity:.08;}
+.about-initials{width:70px;height:70px;background:linear-gradient(135deg,var(--teal),var(--teal2));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:white;margin-bottom:16px;}
+.about-name{font-size:20px;font-weight:700;margin-bottom:4px;}
+.about-role{color:var(--teal2);font-size:12px;margin-bottom:20px;}
+.skills-list{display:flex;flex-wrap:wrap;gap:7px;}
+.skill-tag{background:rgba(0,180,166,.12);border:1px solid rgba(0,180,166,.25);color:var(--teal2);padding:5px 12px;border-radius:20px;font-size:11px;font-weight:500;}
+.about-text p{color:var(--text2);font-size:15px;line-height:1.8;margin-bottom:14px;}
+.exp-badges{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+.exp-badge{text-align:center;background:var(--gray);border-radius:12px;padding:14px 18px;}
+.exp-num{font-size:24px;font-weight:800;color:var(--navy);}
+.exp-lbl{font-size:11px;color:var(--text3);margin-top:2px;}
+
+/* SERVICES */
+.services{background:var(--gray);position:relative;overflow:hidden;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;}
+.service-card{background:white;border-radius:16px;padding:24px;border:1.5px solid var(--gray2);transition:all .3s;position:relative;overflow:hidden;}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal2));transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.service-card:hover::before{transform:scaleX(1);}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.07);border-color:var(--teal-mid);}
+.svc-icon{width:46px;height:46px;background:var(--teal-light);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:22px;}
+.svc-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.svc-desc{color:var(--text2);font-size:13px;line-height:1.7;}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px;}
+.proj-card{background:white;border-radius:16px;border:1.5px solid var(--gray2);overflow:hidden;transition:all .3s;cursor:pointer;}
+.proj-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.09);border-color:var(--teal-mid);}
+.proj-media{position:relative;height:160px;overflow:hidden;background:#0a1628;}
+.proj-media canvas{width:100%;height:100%;display:block;}
+.proj-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:rgba(10,22,40,.4);opacity:0;transition:opacity .3s;}
+.proj-card:hover .proj-overlay,.proj-card:active .proj-overlay{opacity:1;}
+.play-btn{width:46px;height:46px;background:rgba(0,180,166,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.proj-label{color:rgba(255,255,255,.85);font-size:11px;font-weight:600;}
+.proj-body{padding:16px;}
+.proj-tool{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:10px;font-weight:600;padding:3px 9px;border-radius:10px;margin-bottom:8px;}
+.proj-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.proj-desc{color:var(--text2);font-size:12px;line-height:1.6;margin-bottom:10px;}
+.proj-open-btn{display:inline-flex;align-items:center;gap:5px;background:var(--navy);color:white;border:none;padding:7px 15px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;}
+.proj-open-btn:hover{background:var(--teal);}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(6px);padding:12px;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:white;border-radius:20px;max-width:860px;width:100%;overflow:hidden;position:relative;animation:modalIn .3s ease;max-height:90svh;overflow-y:auto;}
+@keyframes modalIn{from{opacity:0;transform:scale(.94);}to{opacity:1;transform:scale(1);}}
+.modal-close{position:absolute;top:10px;right:10px;width:34px;height:34px;background:rgba(0,0,0,.25);border:none;border-radius:50%;font-size:16px;cursor:pointer;color:white;z-index:10;display:flex;align-items:center;justify-content:center;}
+.modal-media{width:100%;height:280px;background:#0a1628;position:relative;overflow:hidden;flex-shrink:0;}
+.modal-media canvas{width:100%;height:100%;display:block;}
+.modal-info{padding:20px 24px 24px;}
+.modal-tool{display:inline-block;background:var(--teal-light);color:var(--teal);font-size:11px;font-weight:600;padding:3px 10px;border-radius:12px;margin-bottom:8px;}
+.modal-title{font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.modal-desc{color:var(--text2);font-size:14px;line-height:1.7;margin-bottom:12px;}
+.modal-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.modal-tag{background:var(--gray);color:var(--text2);font-size:11px;padding:4px 10px;border-radius:8px;}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.modal-wa{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:white;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;}
+.modal-wa:hover{background:#1ebe5d;}
+.modal-inq{display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:white;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none;}
+.modal-inq:hover{background:#0d2040;}
+
+/* INQUIRY */
+.inquiry{background:var(--navy);position:relative;overflow:hidden;}
+.inq-orb1{position:absolute;width:400px;height:400px;background:var(--teal);border-radius:50%;filter:blur(100px);opacity:.06;top:-80px;right:-80px;}
+.inq-orb2{position:absolute;width:250px;height:250px;background:var(--teal);border-radius:50%;filter:blur(70px);opacity:.05;bottom:-40px;left:-40px;}
+.inquiry .section-title{color:white;}.inquiry .section-sub{color:rgba(255,255,255,.6);}
+.inquiry-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;margin-top:40px;}
+.inq-info h3{color:var(--teal2);font-size:17px;font-weight:600;margin-bottom:10px;}
+.inq-info p{color:rgba(255,255,255,.65);font-size:14px;line-height:1.8;margin-bottom:24px;}
+.inq-steps{display:flex;flex-direction:column;gap:14px;}
+.inq-step{display:flex;gap:12px;align-items:flex-start;}
+.step-num{width:30px;height:30px;background:rgba(0,180,166,.2);border:1.5px solid rgba(0,180,166,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--teal2);font-size:12px;font-weight:700;flex-shrink:0;}
+.step-txt{color:rgba(255,255,255,.7);font-size:13px;line-height:1.6;padding-top:4px;}
+.inq-form{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:28px;backdrop-filter:blur(10px);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{margin-bottom:14px;}
+.form-group label{display:block;color:rgba(255,255,255,.7);font-size:12px;font-weight:500;margin-bottom:6px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:white;font-family:'Inter',sans-serif;font-size:14px;padding:11px 14px;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.3);}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--teal);}
+.form-group select{appearance:none;cursor:pointer;}.form-group select option{background:#0a1628;color:white;}
+.form-group textarea{resize:vertical;min-height:90px;}
+.form-group input[type=file]{padding:9px 12px;cursor:pointer;}
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--teal),var(--teal2));color:white;border:none;padding:14px;border-radius:30px;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;}
+.submit-btn:hover,.submit-btn:active{opacity:.9;}
+.success-msg{display:none;text-align:center;padding:28px;}
+.success-msg .check{font-size:48px;margin-bottom:10px;}
+.success-msg h3{font-size:18px;font-weight:700;margin-bottom:6px;color:white;}
+.success-msg p{color:rgba(255,255,255,.6);font-size:13px;}
+
+/* CONNECT */
+.connect-wrap{text-align:center;padding:70px 16px;}
+.connect-inner{max-width:640px;margin:0 auto;}
+.connect-inner .section-title{margin-bottom:14px;}
+.connect-inner p{color:var(--text2);font-size:16px;line-height:1.7;margin-bottom:30px;}
+.connect-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.conn-btn{display:flex;align-items:center;gap:8px;padding:12px 22px;border-radius:30px;font-size:14px;font-weight:600;text-decoration:none;transition:all .25s;}
+.conn-linkedin{background:var(--navy);color:white;}
+.conn-email{background:var(--teal-light);color:var(--teal);border:1.5px solid var(--teal-mid);}
+.conn-email:hover{background:var(--teal);color:white;}
+.conn-whatsapp{background:#25D366;color:white;}
+footer{background:var(--navy);color:rgba(255,255,255,.5);text-align:center;padding:24px;font-size:12px;}
+footer span{color:var(--teal2);}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+  .projects-grid{grid-template-columns:repeat(2,1fr);}
+  .about-grid{grid-template-columns:1fr;}
+  .inquiry-grid{grid-template-columns:1fr;}
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-visual{display:none;}
+}
+@media(max-width:600px){
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .hero{padding:72px 16px 48px;}
+  .hero h1{font-size:30px;letter-spacing:-.5px;}
+  .hero-tagline{font-size:14px;}
+  .hero-btns{gap:10px;}
+  .btn-primary,.btn-outline{padding:12px 20px;font-size:13px;width:100%;text-align:center;}
+  .section-title{font-size:26px;}
+  .section-sub{font-size:14px;}
+  .services-grid{grid-template-columns:1fr;}
+  .projects-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .about-card{padding:24px;}
+  .exp-badges{gap:8px;}
+  .exp-badge{padding:12px 14px;}
+  .inq-form{padding:20px 16px;}
+  .modal-media{height:200px;}
+  .modal-info{padding:16px;}
+  .modal-title{font-size:15px;}
+  .modal-desc{font-size:13px;}
+  .connect-links{flex-direction:column;align-items:center;}
+  .conn-btn{width:220px;justify-content:center;}
+  section{padding:52px 16px;}
+}
+@media(max-width:380px){
+  .hero h1{font-size:26px;}
+  .about-initials{width:56px;height:56px;font-size:20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">SM<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#inquiry">Inquiry</a></li>
+    </ul>
+    <a href="#inquiry" class="nav-cta">Get Free Consultation</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+  <a href="#inquiry" onclick="closeMobileMenu()">Inquiry</a>
+  <a href="#inquiry" onclick="closeMobileMenu()" style="color:var(--teal);font-weight:700;">Get Free Consultation</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><div class="dot"></div>Available for Projects</div>
+      <h1>Turn Your Data<br>Into <span>Business Growth</span></h1>
+      <p class="hero-tagline">Hi, I'm <strong style="color:white;">Shashank Makwana</strong> — Data Analyst who transforms raw numbers into revenue-driving decisions.</p>
+      <div class="hero-btns">
+        <a href="#inquiry" class="btn-primary">📊 Start Your Analysis</a>
+        <a href="#projects" class="btn-outline">View My Work</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="dashboard-card">
+        <div class="dash-header"><div class="dash-title">Business Intelligence Report</div><div class="dash-badge">Live</div></div>
+        <div class="dash-stats">
+          <div class="stat-box"><div class="stat-num">+38%</div><div class="stat-lbl">Revenue Growth</div></div>
+          <div class="stat-box"><div class="stat-num">2.4x</div><div class="stat-lbl">ROI Increase</div></div>
+          <div class="stat-box"><div class="stat-num">91%</div><div class="stat-lbl">Forecast Accuracy</div></div>
+          <div class="stat-box"><div class="stat-num">-22%</div><div class="stat-lbl">Cost Reduction</div></div>
+        </div>
+        <div class="chart-bars">
+          <div class="bar"><div class="bar-fill" style="--h:40%"></div></div>
+          <div class="bar"><div class="bar-fill" style="--h:65%"></div></div>
+          <div class="bar"><div class="bar-fill" style="--h:55%"></div></div>
+          <div class="bar"><div class="bar-fill" style="--h:80%"></div></div>
+          <div class="bar"><div class="bar-fill" style="--h:70%"></div></div>
+          <div class="bar"><div class="bar-fill" style="--h:95%"></div></div>
+          <div class="bar"><div class="bar-fill" style="--h:88%"></div></div>
+        </div>
+        <div class="dash-footer">📈 <span class="trend">↑ 38% from last quarter</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="about-card">
+          <div class="about-card-glow"></div>
+          <div class="about-initials">SM</div>
+          <div class="about-name">Shashank Makwana</div>
+          <div class="about-role">Data Analyst & Business Intelligence Expert</div>
+          <div class="skills-list">
+            <span class="skill-tag">Excel</span><span class="skill-tag">Google Sheets</span>
+            <span class="skill-tag">Power BI</span><span class="skill-tag">Tableau</span>
+            <span class="skill-tag">Looker</span><span class="skill-tag">SQL</span><span class="skill-tag">Python</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-tag">About Me</div>
+        <h2 class="section-title">Data Tells a Story.<br>I Help You Read It.</h2>
+        <p>I specialize in transforming complex datasets into clear, actionable business strategies. Whether you're a startup or an established enterprise, I craft data solutions tailored to your specific goals.</p>
+        <p>From building real-time process trackers to delivering performance acceleration reports — every insight I deliver drives measurable impact.</p>
+        <div class="exp-badges">
+          <div class="exp-badge"><div class="exp-num">50+</div><div class="exp-lbl">Projects Done</div></div>
+          <div class="exp-badge"><div class="exp-num">7+</div><div class="exp-lbl">Tools Mastered</div></div>
+          <div class="exp-badge"><div class="exp-num">100%</div><div class="exp-lbl">Data-Driven</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="section-inner">
+    <div class="section-tag">What I Offer</div>
+    <h2 class="section-title">Solutions That Drive Results</h2>
+    <p class="section-sub">Every business deserves insights that are clear, powerful, and built to grow with you.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="svc-icon">📊</div><div class="svc-title">Business Intelligence Solutions</div><div class="svc-desc">End-to-end BI dashboards using Power BI, Tableau & Looker — giving you a 360° view of your performance at a glance.</div></div>
+      <div class="service-card"><div class="svc-icon">🚀</div><div class="svc-title">Revenue & Sales Optimization</div><div class="svc-desc">Deep-dive sales analysis that reveals hidden opportunities and gives you a clear roadmap to increase revenue.</div></div>
+      <div class="service-card"><div class="svc-icon">⚙️</div><div class="svc-title">Smart Process Tracker</div><div class="svc-desc">Custom-built Excel & Google Sheets trackers that monitor workflows in real time — reducing bottlenecks and boosting efficiency.</div></div>
+      <div class="service-card"><div class="svc-icon">💡</div><div class="svc-title">Performance Acceleration Reports</div><div class="svc-desc">In-depth reports with actionable suggestions to improve KPIs, reduce costs, and keep you ahead of competition.</div></div>
+      <div class="service-card"><div class="svc-icon">📈</div><div class="svc-title">Data-Driven Growth Strategy</div><div class="svc-desc">SQL & Python-powered analysis that mines your data for growth patterns and delivers a strategic roadmap for your industry.</div></div>
+      <div class="service-card"><div class="svc-icon">🔍</div><div class="svc-title">Smart Insights & Forecasting</div><div class="svc-desc">Predictive analytics and trend forecasting to plan inventory, staffing, budgets, and campaigns with confidence.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--gray);position:relative;overflow:hidden;">
+  <div class="section-inner" style="position:relative;z-index:2;">
+    <div class="section-tag">Demo Projects</div>
+    <h2 class="section-title">Work That Speaks for Itself</h2>
+    <p class="section-sub">Tap any project to view a full animated dashboard demo.</p>
+    <div class="projects-grid">
+      <div class="proj-card" onclick="openModal(0)">
+        <div class="proj-media">
+          <canvas id="c0"></canvas>
+          <div class="proj-overlay"><div class="play-btn">▶</div><div class="proj-label">Open Full Dashboard</div></div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tool">Power BI</div>
+          <div class="proj-title">Sales Performance Dashboard</div>
+          <div class="proj-desc">Interactive real-time sales tracking — regional breakdown, SKU performance, and monthly revenue trends.</div>
+          <button class="proj-open-btn">📊 View Dashboard Demo</button>
+        </div>
+      </div>
+      <div class="proj-card" onclick="openModal(1)">
+        <div class="proj-media">
+          <canvas id="c1"></canvas>
+          <div class="proj-overlay"><div class="play-btn">▶</div><div class="proj-label">Open Full Dashboard</div></div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tool">Python + SQL</div>
+          <div class="proj-title">Customer Churn Predictor</div>
+          <div class="proj-desc">ML model analyzing 50,000+ customer records to predict churn risk with 89% accuracy.</div>
+          <button class="proj-open-btn">📊 View Dashboard Demo</button>
+        </div>
+      </div>
+      <div class="proj-card" onclick="openModal(2)">
+        <div class="proj-media">
+          <canvas id="c2"></canvas>
+          <div class="proj-overlay"><div class="play-btn">▶</div><div class="proj-label">Open Full Dashboard</div></div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tool">Excel + Google Sheets</div>
+          <div class="proj-title">Operational KPI Tracker</div>
+          <div class="proj-desc">Automated real-time tracker for logistics firm — 15+ KPIs, auto-alerts, reducing delays by 35%.</div>
+          <button class="proj-open-btn">📊 View Dashboard Demo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-media"><canvas id="modalCanvas"></canvas></div>
+    <div class="modal-info">
+      <div class="modal-tool" id="mTool"></div>
+      <div class="modal-title" id="mTitle"></div>
+      <div class="modal-desc" id="mDesc"></div>
+      <div class="modal-tags" id="mTags"></div>
+      <div class="modal-actions">
+        <a href="https://wa.me/919978110903" class="modal-wa" target="_blank">💬 Order on WhatsApp</a>
+        <button class="modal-inq" onclick="closeModalDirect();document.getElementById('inquiry').scrollIntoView({behavior:'smooth'});">📋 Send Inquiry</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INQUIRY -->
+<section id="inquiry" class="inquiry">
+  <div class="inq-orb1"></div><div class="inq-orb2"></div>
+  <div class="section-inner" style="position:relative;z-index:2;">
+    <div class="section-tag" style="background:rgba(0,180,166,.15);color:var(--teal2);">Get In Touch</div>
+    <h2 class="section-title">Let's Grow Your Business Together</h2>
+    <p class="section-sub">Tell me about your data challenge — I'll respond within 24 hours with a clear plan.</p>
+    <div class="inquiry-grid">
+      <div class="inq-info">
+        <h3>How It Works</h3>
+        <p>Simple, fast, and commitment-free.</p>
+        <div class="inq-steps">
+          <div class="inq-step"><div class="step-num">1</div><div class="step-txt"><strong style="color:white;">Submit your inquiry</strong> — describe your data, goals, and what business problem you want to solve.</div></div>
+          <div class="inq-step"><div class="step-num">2</div><div class="step-txt"><strong style="color:white;">I review & respond</strong> — hear back within 24 hours with a tailored approach and estimate.</div></div>
+          <div class="inq-step"><div class="step-num">3</div><div class="step-txt"><strong style="color:white;">We align & execute</strong> — once scope is agreed, I deliver clear, impactful results.</div></div>
+        </div>
+      </div>
+      <div class="inq-form">
+        <form id="inquiry-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/" enctype="multipart/form-data">
+          <input type="hidden" name="form-name" value="contact"/>
+          <div class="form-row">
+            <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="John Smith"/></div>
+            <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="john@company.com"/></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" name="phone" placeholder="+91 98765 43210"/></div>
+            <div class="form-group"><label>Company / Business</label><input type="text" name="company" placeholder="Your Company Ltd."/></div>
+          </div>
+          <div class="form-group">
+            <label>What Do You Need Help With?</label>
+            <select name="service"><option value="" disabled selected>Select a service...</option><option>Business Intelligence Dashboard</option><option>Sales & Revenue Analysis</option><option>Process Tracker / Automation</option><option>Performance Report</option><option>Data Strategy & Forecasting</option><option>Other / Not Sure Yet</option></select>
+          </div>
+          <div class="form-group"><label>Tell Me About Your Project</label><textarea name="message" placeholder="Describe your data, what you want to achieve, and any tools you currently use..."></textarea></div>
+          <div class="form-group"><label>Attach Screenshot (optional)</label><input type="file" name="attachment" accept="image/*,video/*"/></div>
+          <button type="submit" class="submit-btn">Send My Inquiry →</button>
+        </form>
+        <div class="success-msg" id="success-msg">
+          <div class="check">✅</div>
+          <h3>Inquiry Received!</h3>
+          <p>Thank you! Shashank will review your project and get back to you within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="connect-wrap">
+  <div class="connect-inner">
+    <div class="section-tag">Connect With Me</div>
+    <h2 class="section-title">Ready to Make Your Data Work for You?</h2>
+    <p>Whether you have a small dataset or an enterprise-level challenge — let's talk.</p>
+    <div class="connect-links">
+      <a href="https://www.linkedin.com/in/shashang-s110903" class="conn-btn conn-linkedin" target="_blank">💼 LinkedIn</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shashankmakwana100@gmail.com" target="_blank" class="conn-btn conn-email">📧 Email Me</a>
+      <a href="https://wa.me/919978110903" class="conn-btn conn-whatsapp" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+</div>
+<footer><p>© 2025 <span>Shashank Makwana</span> · Data Analyst · Built to drive business growth through data</p></footer>
+
+<script>
+/* === HAMBURGER === */
+var ham=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
+ham.addEventListener('click',function(){ham.classList.toggle('open');mm.classList.toggle('open');});
+function closeMobileMenu(){ham.classList.remove('open');mm.classList.remove('open');}
+document.addEventListener('click',function(e){if(!ham.contains(e.target)&&!mm.contains(e.target))closeMobileMenu();});
+
+/* === HERO CANVAS === */
+var hC=document.getElementById('heroCanvas'),hCtx=hC.getContext('2d'),pts=[];
+function rsHero(){hC.width=window.innerWidth;hC.height=window.innerHeight;}
+rsHero();window.addEventListener('resize',rsHero);
+for(var i=0;i<60;i++) pts.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.8+.4,o:Math.random()*.35+.1});
+var hObjs=[{type:'bars',x:.1,y:.22,a:0,spd:.011,s:28},{type:'arrow',x:.8,y:.15,a:0,spd:.008,s:22},{type:'ring',x:.7,y:.7,a:0,spd:.01,s:24},{type:'linechart',x:.45,y:.12,a:0,spd:.006,s:30},{type:'pie',x:.86,y:.48,a:0,spd:.011,s:20}];
+function dHObj(o){
+  var x=o.x*hC.width,y=o.y*hC.height,a=o.a,s=o.s;
+  hCtx.save();hCtx.translate(x,y);
+  if(o.type==='bars'){
+    var vs=[.5,.75,.6,.9,.7,1];
+    vs.forEach(function(v,i){var bx=(i-2.5)*s*.32,bh=v*s*1.1;hCtx.fillStyle='rgba(0,180,166,.35)';hCtx.fillRect(bx,-bh,s*.22,bh);hCtx.fillStyle='rgba(0,212,196,.5)';hCtx.fillRect(bx,-bh,s*.22,4);});
+    hCtx.strokeStyle='rgba(0,255,180,.8)';hCtx.lineWidth=2;hCtx.beginPath();hCtx.moveTo(-s*.4,s*.2);hCtx.lineTo(s*.4,-s*.7);hCtx.stroke();
+  } else if(o.type==='arrow'){
+    var prog=(.5+.5*Math.sin(a*2));
+    hCtx.strokeStyle='rgba(0,255,180,.85)';hCtx.lineWidth=2.5;hCtx.beginPath();hCtx.moveTo(-s,-s*.2+s*.4*prog);hCtx.quadraticCurveTo(0,s*.25,s,-s);hCtx.stroke();
+    hCtx.fillStyle='rgba(0,255,180,.7)';hCtx.font='bold '+(s*.28)+'px Inter';hCtx.textAlign='center';hCtx.fillText('+'+Math.round(28+8*prog)+'%',-s*.15,s*.7);
+  } else if(o.type==='ring'){
+    var sl=[.35,.25,.2,.2],sc2=['rgba(0,212,196,.7)','rgba(0,180,166,.5)','rgba(0,140,130,.6)','rgba(0,100,95,.4)'],sa=a;
+    sl.forEach(function(sv,i){var ea=sa+sv*Math.PI*2;hCtx.beginPath();hCtx.moveTo(0,0);hCtx.arc(0,0,s,sa,ea);hCtx.closePath();hCtx.fillStyle=sc2[i];hCtx.fill();sa=ea;});
+    hCtx.beginPath();hCtx.arc(0,0,s*.55,0,Math.PI*2);hCtx.fillStyle='rgba(10,22,40,.8)';hCtx.fill();
+  } else if(o.type==='linechart'){
+    var ld=[.3,.5,.4,.65,.55,.8,.7,.9],w2=s*1.5,h2=s;
+    hCtx.strokeStyle='rgba(0,212,196,.65)';hCtx.lineWidth=1.8;hCtx.beginPath();
+    ld.forEach(function(v,i){var px=-w2/2+i*(w2/7),py=h2/2-v*h2;i?hCtx.lineTo(px,py):hCtx.moveTo(px,py);});hCtx.stroke();
+    var ag=hCtx.createLinearGradient(0,-h2,0,h2/2);ag.addColorStop(0,'rgba(0,212,196,.2)');ag.addColorStop(1,'transparent');
+    hCtx.lineTo(w2/2,h2/2);hCtx.lineTo(-w2/2,h2/2);hCtx.closePath();hCtx.fillStyle=ag;hCtx.fill();
+  } else if(o.type==='pie'){
+    var ps=[.4,.3,.3],pc=['rgba(0,212,196,.65)','rgba(0,160,150,.5)','rgba(0,120,115,.55)'],sa2=a;
+    ps.forEach(function(pv,i){var ea=sa2+pv*Math.PI*2;hCtx.beginPath();hCtx.moveTo(0,0);hCtx.arc(0,0,s,sa2,ea);hCtx.closePath();hCtx.fillStyle=pc[i];hCtx.fill();sa2=ea;});
+  }
+  hCtx.restore();
+}
+function animHero(){
+  hCtx.clearRect(0,0,hC.width,hC.height);
+  pts.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=hC.width;if(p.x>hC.width)p.x=0;if(p.y<0)p.y=hC.height;if(p.y>hC.height)p.y=0;hCtx.beginPath();hCtx.arc(p.x,p.y,p.r,0,Math.PI*2);hCtx.fillStyle='rgba(0,212,196,'+p.o+')';hCtx.fill();});
+  for(var i=0;i<pts.length;i++) for(var j=i+1;j<pts.length;j++){var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){hCtx.beginPath();hCtx.strokeStyle='rgba(0,180,166,'+(0.08*(1-d/100))+')';hCtx.lineWidth=.5;hCtx.moveTo(pts[i].x,pts[i].y);hCtx.lineTo(pts[j].x,pts[j].y);hCtx.stroke();}}
+  hObjs.forEach(function(o){o.a+=o.spd;dHObj(o);});
+  requestAnimationFrame(animHero);
+}
+animHero();
+
+/* === CANVAS HELPERS === */
+function rrc(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
+
+/* === PROJECT CARD PREVIEWS === */
+function initCardCanvas(el,drawFn){
+  var rect=el.parentElement.getBoundingClientRect();
+  el.width=rect.width||300;el.height=160;
+  drawFn(el);
+}
+function drawSalesDash(c){
+  var ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.fillStyle='#0a1628';ctx.fillRect(0,0,w,h);
+  var mo=['J','F','M','A','M','J','J','A','S','O','N','D'],vs=[55,68,50,82,70,94,79,65,88,74,83,97],bw=Math.floor((w-40)/12*.6);
+  for(var g=0;g<4;g++){var gy=h-28-g*(h-48)/3;ctx.beginPath();ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=1;ctx.moveTo(28,gy);ctx.lineTo(w-8,gy);ctx.stroke();}
+  vs.forEach(function(v,i){var bh=v/100*(h-44),x=28+i*((w-36)/12)+2;var grd=ctx.createLinearGradient(0,h-28-bh,0,h-28);grd.addColorStop(0,'#00d4c4');grd.addColorStop(1,'rgba(0,180,166,.3)');ctx.fillStyle=grd;ctx.fillRect(x,h-28-bh,bw,bh);ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='7px Inter';ctx.textAlign='center';ctx.fillText(mo[i],x+bw/2,h-18);});
+  ctx.beginPath();ctx.strokeStyle='rgba(0,255,180,.8)';ctx.lineWidth=1.5;vs.forEach(function(v,i){var x=28+i*((w-36)/12)+bw/2,y=h-28-v/100*(h-44);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();
+  ctx.fillStyle='white';ctx.font='bold 10px Inter';ctx.textAlign='left';ctx.fillText('Sales Dashboard',8,14);ctx.fillStyle='#00d4c4';ctx.font='8px Inter';ctx.fillText('+38% Revenue',8,25);
+}
+function drawChurnDash(c){
+  var ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.fillStyle='#0a1628';ctx.fillRect(0,0,w,h);
+  for(var i=0;i<45;i++){var px=15+Math.random()*(w-25),py=22+Math.random()*(h-38),r2=Math.random();ctx.beginPath();ctx.arc(px,py,2.5,0,Math.PI*2);ctx.fillStyle=r2>.65?'rgba(255,80,80,.75)':r2>.35?'rgba(255,180,0,.65)':'rgba(0,212,196,.65)';ctx.fill();}
+  ctx.strokeStyle='rgba(0,212,196,.5)';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(15,h-25);ctx.quadraticCurveTo(w/2,h/2,w-15,22);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='white';ctx.font='bold 10px Inter';ctx.textAlign='left';ctx.fillText('Churn Analysis',8,14);ctx.fillStyle='#00d4c4';ctx.font='8px Inter';ctx.fillText('89% Accuracy',8,25);
+}
+function drawKPIDash(c){
+  var ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.fillStyle='#0a1628';ctx.fillRect(0,0,w,h);
+  var ks=[{l:'On-Time',v:.87},{l:'Efficiency',v:.73},{l:'Output',v:.91},{l:'Quality',v:.95}];
+  ks.forEach(function(k,i){var y=28+i*30,bw=w-90;ctx.fillStyle='rgba(255,255,255,.45)';ctx.font='8px Inter';ctx.textAlign='left';ctx.fillText(k.l,8,y+2);ctx.fillStyle='rgba(255,255,255,.06)';ctx.fillRect(62,y-10,bw,12);var grd=ctx.createLinearGradient(62,0,62+bw,0);grd.addColorStop(0,'#00b4a6');grd.addColorStop(1,'#00d4c4');ctx.fillStyle=grd;ctx.fillRect(62,y-10,bw*k.v,12);ctx.fillStyle='rgba(255,255,255,.65)';ctx.font='7px Inter';ctx.fillText(Math.round(k.v*100)+'%',62+bw*k.v+3,y);});
+  ctx.fillStyle='white';ctx.font='bold 10px Inter';ctx.textAlign='left';ctx.fillText('KPI Tracker',8,14);
+}
+setTimeout(function(){
+  var c0=document.getElementById('c0'),c1=document.getElementById('c1'),c2=document.getElementById('c2');
+  initCardCanvas(c0,drawSalesDash);initCardCanvas(c1,drawChurnDash);initCardCanvas(c2,drawKPIDash);
+},120);
+window.addEventListener('resize',function(){
+  var c0=document.getElementById('c0'),c1=document.getElementById('c1'),c2=document.getElementById('c2');
+  initCardCanvas(c0,drawSalesDash);initCardCanvas(c1,drawChurnDash);initCardCanvas(c2,drawKPIDash);
+});
+
+/* === MODAL === */
+var projects=[
+  {tool:'Power BI',title:'Sales Performance Dashboard',desc:'A comprehensive Power BI dashboard tracking 12-month revenue trends, regional breakdowns, and top SKU performance. Delivered 28% faster executive decision-making by replacing 6 manual weekly reports with one live view.',tags:['Power BI','DAX','Sales Analytics','KPI Tracking','Revenue Reporting'],fn:drawModalSales},
+  {tool:'Python + SQL',title:'Customer Churn Prediction Model',desc:'A machine learning pipeline built with Python + SQL analyzing 50,000+ customer records. Segments customers by churn probability and outputs actionable retention strategies — 89% accuracy proven in 3-month validation.',tags:['Python','SQL','Machine Learning','Churn Analysis','Predictive Analytics'],fn:drawModalChurn},
+  {tool:'Excel + Google Sheets',title:'Operational KPI Process Tracker',desc:'An automated real-time tracker for a logistics company — monitoring 15+ KPIs with conditional formatting, auto-alerts, and daily email summaries. Reduced operational delays by 35% in the first month.',tags:['Excel','Google Sheets','KPI Dashboard','Logistics','Process Automation'],fn:drawModalKPI}
+];
+function drawModalSales(c){
+  var ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.fillStyle='#0a1628';ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='rgba(255,255,255,.04)';ctx.fillRect(0,0,w,50);
+  ctx.fillStyle='white';ctx.font='bold 14px Inter';ctx.textAlign='left';ctx.fillText('Sales Performance Dashboard',16,20);
+  ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='11px Inter';ctx.fillText('FY 2024 · All Regions · Live',16,37);
+  var kpis=[{l:'Total Revenue',v:'₹48.2L',ch:'+38%'},{l:'Avg Order Value',v:'₹12,450',ch:'+12%'},{l:'Units Sold',v:'3,872',ch:'+22%'},{l:'Return Rate',v:'4.2%',ch:'-1.8%'}];
+  var tw=Math.floor((w-36)/4);
+  kpis.forEach(function(k,i){var tx=12+i*(tw+4),ty=58;rrc(ctx,tx,ty,tw,52,6);ctx.fillStyle='rgba(255,255,255,.05)';ctx.fill();ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='10px Inter';ctx.textAlign='left';ctx.fillText(k.l,tx+8,ty+15);ctx.fillStyle='white';ctx.font='bold 16px Inter';ctx.fillText(k.v,tx+8,ty+37);ctx.fillStyle='#00e676';ctx.font='bold 10px Inter';ctx.fillText(k.ch,tx+tw-32,ty+37);});
+  var mo=['J','F','M','A','M','J','J','A','S','O','N','D'],vs=[55,68,50,85,70,97,80,67,90,76,85,100];
+  var cl=14,ct=120,cW=w-28,cH=h-168;
+  for(var g=0;g<5;g++){var gy=ct+cH-g*(cH/4);ctx.beginPath();ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=1;ctx.moveTo(cl,gy);ctx.lineTo(cl+cW,gy);ctx.stroke();}
+  var bw=Math.floor((cW-20)/12*.62);
+  vs.forEach(function(v,i){var bh=v/100*cH,x=cl+10+i*((cW-14)/12);var grd=ctx.createLinearGradient(0,ct+cH-bh,0,ct+cH);grd.addColorStop(0,'#00d4c4');grd.addColorStop(1,'rgba(0,180,166,.2)');ctx.fillStyle=grd;ctx.fillRect(x,ct+cH-bh,bw,bh);ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='8px Inter';ctx.textAlign='center';ctx.fillText(mo[i],x+bw/2,ct+cH+11);});
+  ctx.beginPath();ctx.strokeStyle='rgba(0,255,180,.85)';ctx.lineWidth=2;vs.forEach(function(v,i){var x=cl+10+i*((cW-14)/12)+bw/2,y=ct+cH-v/100*cH;i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();
+  ctx.fillStyle='#00ff9d';ctx.font='bold 11px Inter';ctx.textAlign='left';ctx.fillText('↑ Revenue Trend +38% YoY',cl+8,ct+cH+26);
+}
+function drawModalChurn(c){
+  var ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.fillStyle='#0a1628';ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='rgba(255,255,255,.04)';ctx.fillRect(0,0,w,50);
+  ctx.fillStyle='white';ctx.font='bold 14px Inter';ctx.textAlign='left';ctx.fillText('Customer Churn Prediction',16,20);
+  ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='11px Inter';ctx.fillText('50,000+ Records · 89% Accuracy',16,37);
+  var ks=[{l:'Total Customers',v:'50,248'},{l:'High Risk',v:'8,342'},{l:'Retention Rate',v:'83.4%'},{l:'Revenue Saved',v:'₹22.4L'}];
+  var tw=Math.floor((w-36)/4);
+  ks.forEach(function(k,i){var tx=12+i*(tw+4),ty=58;rrc(ctx,tx,ty,tw,50,6);ctx.fillStyle='rgba(255,255,255,.05)';ctx.fill();ctx.fillStyle='rgba(255,255,255,.35)';ctx.font='10px Inter';ctx.textAlign='left';ctx.fillText(k.l,tx+8,ty+14);ctx.fillStyle='white';ctx.font='bold 15px Inter';ctx.fillText(k.v,tx+8,ty+35);});
+  for(var i=0;i<160;i++){var px=30+Math.random()*(w-50),py=118+Math.random()*(h-160),r2=Math.random();ctx.beginPath();ctx.arc(px,py,r2>.65?3.5:r2>.35?3:2.5,0,Math.PI*2);ctx.fillStyle=r2>.65?'rgba(255,80,80,.7)':r2>.35?'rgba(255,180,0,.6)':'rgba(0,212,196,.6)';ctx.fill();}
+  ctx.strokeStyle='rgba(0,212,196,.45)';ctx.lineWidth=2;ctx.setLineDash([6,4]);ctx.beginPath();ctx.moveTo(30,h-30);ctx.quadraticCurveTo(w/2,h/2,w-20,118);ctx.stroke();ctx.setLineDash([]);
+  var legs=[{c:'rgba(255,80,80,.8)',l:'High Risk'},{c:'rgba(255,180,0,.7)',l:'Medium'},{c:'rgba(0,212,196,.7)',l:'Low Risk'}];
+  legs.forEach(function(leg,i){ctx.beginPath();ctx.arc(w-170+i*58,h-14,4,0,Math.PI*2);ctx.fillStyle=leg.c;ctx.fill();ctx.fillStyle='rgba(255,255,255,.45)';ctx.font='9px Inter';ctx.textAlign='left';ctx.fillText(leg.l,w-163+i*58,h-10);});
+}
+function drawModalKPI(c){
+  var ctx=c.getContext('2d'),w=c.width,h=c.height;
+  ctx.fillStyle='#0a1628';ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='rgba(255,255,255,.04)';ctx.fillRect(0,0,w,50);
+  ctx.fillStyle='white';ctx.font='bold 14px Inter';ctx.textAlign='left';ctx.fillText('Operational KPI Tracker',16,20);
+  ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='11px Inter';ctx.fillText('15 KPIs · Real-Time · Excel + Sheets',16,37);
+  var ks=[{l:'On-Time Delivery',v:.87,t:.85},{l:'Route Efficiency',v:.73,t:.80},{l:'Output Capacity',v:.91,t:.88},{l:'Quality Score',v:.95,t:.90},{l:'Cost per Shipment',v:.68,t:.75},{l:'Driver Utilization',v:.82,t:.80}];
+  ks.forEach(function(k,i){
+    var y=58+i*((h-78)/6),bw=w-180;
+    ctx.fillStyle='rgba(255,255,255,.04)';ctx.fillRect(8,y-2,w-16,((h-78)/6)-4);
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='11px Inter';ctx.textAlign='left';ctx.fillText(k.l,14,y+11);
+    ctx.fillStyle='rgba(255,255,255,.06)';ctx.fillRect(165,y,bw,14);
+    var grd=ctx.createLinearGradient(165,0,165+bw,0);grd.addColorStop(0,'#00b4a6');grd.addColorStop(1,'#00d4c4');ctx.fillStyle=grd;ctx.fillRect(165,y,bw*k.v,14);
+    ctx.strokeStyle='rgba(255,200,0,.8)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(165+bw*k.t,y-2);ctx.lineTo(165+bw*k.t,y+16);ctx.stroke();
+    var met=k.v>=k.t;ctx.fillStyle=met?'#00e676':'#ff9800';ctx.font='bold 10px Inter';ctx.textAlign='right';ctx.fillText(met?'✓ On Target':'↑ Improve',w-10,y+11);
+  });
+}
+function openModal(idx){
+  var p=projects[idx];
+  document.getElementById('mTool').textContent=p.tool;
+  document.getElementById('mTitle').textContent=p.title;
+  document.getElementById('mDesc').textContent=p.desc;
+  var te=document.getElementById('mTags');te.innerHTML='';
+  p.tags.forEach(function(t){var s=document.createElement('span');s.className='modal-tag';s.textContent=t;te.appendChild(s);});
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow='hidden';
+  var mc=document.getElementById('modalCanvas');
+  mc.width=mc.parentElement.offsetWidth||800;mc.height=mc.parentElement.offsetHeight||280;
+  p.fn(mc);
+}
+function closeModal(e){if(e.target===document.getElementById('modal'))closeModalDirect();}
+function closeModalDirect(){document.getElementById('modal').classList.remove('active');document.body.style.overflow='';}
+
+/* === FORM === */
+var form=document.getElementById('inquiry-form');
+if(form){form.addEventListener('submit',function(e){e.preventDefault();form.style.display='none';document.getElementById('success-msg').style.display='block';});}
+
+/* === SCROLL ANIMATIONS === */
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:.08});
+document.querySelectorAll('.service-card,.proj-card,.exp-badge,.inq-step').forEach(function(el){el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .5s ease,transform .5s ease';obs.observe(el);});
+</script>
+</body>
+</html>
